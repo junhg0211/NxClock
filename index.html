@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Nix Clock</title>
+</head>
+<body>
+    <canvas id='main-canvas'></canvas>
+
+    <div class="window" id="setting-window" style="display: none;">
+        <h1>설정</h1>
+        <table>
+            <tr>
+                <td>배수 설정</td>
+                <td><input
+                        type="text"
+                        value="2"
+                        style="text-align: right;"
+                        id="multiplication"></td>
+            </tr>
+        </table>
+        <button onclick="applySetting()">적용</button>
+    </div>
+
+    <script src="js/util.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
