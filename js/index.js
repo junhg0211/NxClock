@@ -66,13 +66,28 @@ function render() {
         context.fillText(i, x, y + clockTextSize / 3);
     }
 
+    for (let i = 1; i <= 60; i++) {
+        context.strokeStyle = CLOCK_TEXT_COLOR;
+        context.lineWidth = 1;
+        context.beginPath();
+        theta = i / 30 * Math.PI;
+        if (i % 5 == 0) {
+            context.moveTo(canvas.width / 2 + Math.cos(theta) * clockRadius * 0.83, canvas.height / 2 + Math.sin(theta) * clockRadius * 0.83);
+        } else {
+            context.moveTo(canvas.width / 2 + Math.cos(theta) * clockRadius * 0.85, canvas.height / 2 + Math.sin(theta) * clockRadius * 0.85);
+        }
+        context.lineTo(canvas.width / 2 + Math.cos(theta) * clockRadius * 0.86, canvas.height / 2 + Math.sin(theta) * clockRadius * 0.86);
+        context.stroke();
+    }
+
     context.fillStyle = DIGITAL_TEXT_COLOR;
-    context.fillText(`${hour}:${zeroPad(minute, 2)}:${zeroPad(second, 2)}`, canvas.width / 2, canvas.height / 2 + clockTextSize / 3);
+    context.fillText(`${hour}:${zeroPad(minute, 2)}:${zeroPad(second, 2)}`, canvas.width / 2, canvas.height / 3 * 2 + clockTextSize / 3);
 
     context.strokeStyle = HOUR_HAND_COLOR;
     context.lineWidth = HOUR_HAND_WIDTH;
     context.beginPath();
-    context.moveTo(canvas.width / 2, canvas.height / 2);
+    context.moveTo(canvas.width / 2 + Math.cos(hourTheta) * clockRadius * HOUR_HAND_RATIO * -0.1,
+                   canvas.height / 2 + Math.sin(hourTheta) * clockRadius * HOUR_HAND_RATIO * -0.1);
     context.lineTo(canvas.width / 2 + Math.cos(hourTheta) * clockRadius * HOUR_HAND_RATIO,
                    canvas.height / 2 + Math.sin(hourTheta) * clockRadius * HOUR_HAND_RATIO);
     context.stroke();
@@ -80,7 +95,8 @@ function render() {
     context.strokeStyle = MINUTE_HAND_COLOR;
     context.lineWidth = MINUTE_HAND_WIDTH;
     context.beginPath();
-    context.moveTo(canvas.width / 2, canvas.height / 2);
+    context.moveTo(canvas.width / 2 + Math.cos(minuteTheta) * clockRadius * MINUTE_HAND_RATIO * -0.1,
+                   canvas.height / 2 + Math.sin(minuteTheta) * clockRadius * MINUTE_HAND_RATIO * -0.1);
     context.lineTo(canvas.width / 2 + Math.cos(minuteTheta) * clockRadius * MINUTE_HAND_RATIO,
                    canvas.height / 2 + Math.sin(minuteTheta) * clockRadius * MINUTE_HAND_RATIO);
     context.stroke();
@@ -88,7 +104,8 @@ function render() {
     context.strokeStyle = SECOND_HAND_COLOR;
     context.lineWidth = SECOND_HAND_WIDTH;
     context.beginPath();
-    context.moveTo(canvas.width / 2, canvas.height / 2);
+    context.moveTo(canvas.width / 2 + Math.cos(secondTheta) * clockRadius * SECOND_HAND_RATIO * -0.1,
+                   canvas.height / 2 + Math.sin(secondTheta) * clockRadius * SECOND_HAND_RATIO * -0.1);
     context.lineTo(canvas.width / 2 + Math.cos(secondTheta) * clockRadius * SECOND_HAND_RATIO,
                    canvas.height / 2 + Math.sin(secondTheta) * clockRadius * SECOND_HAND_RATIO);
     context.stroke();
